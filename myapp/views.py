@@ -254,9 +254,18 @@ def process_view(request):
     
     plt.rcParams['figure.figsize'] = [20, 10]
 
-
+    if request.method == 'GET':
+        input1 = request.GET.get('room', '')
+        output_file = 'data.txt'
+        with open(output_file, 'w') as file:
+            file.write(input1)
     if request.method == 'POST':
-        input1 = request.POST.get('input1') # src
+        input_file = 'data.txt' 
+        with open(input_file, 'r') as file:
+            input1 = file.readline()
+        if input1 == '':
+            input1 = request.POST.get('input1') # src
+        # input1 = request.POST.get('input1') # src
         input2 = request.POST.get('input2') # dest
 
         path = nx.shortest_path(G,input1,input2)
