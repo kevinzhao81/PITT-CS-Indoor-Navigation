@@ -10,4 +10,6 @@ python manage.py runserver
 
 Now you can open <http://127.0.0.1:8000/process/> in your browser to enter room numbers and navigate!
 
+You can also enter the source room id in the URL, e.g., <http://127.0.0.1:8000/process/?room=6150>
+
 
