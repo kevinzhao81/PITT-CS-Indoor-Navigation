@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 
+import os
+
 def index(request):
     data = Image.objects.all()
     context = {
@@ -273,7 +275,11 @@ def process_view(request):
             plt.plot((pt1[0],pt2[0]),(pt1[1],pt2[1]),'r',linewidth=5,linestyle='-')
 
         imgplot = plt.imshow(img)
-        plt.savefig('/Users/kevin/Documents/mapweb/myproject/static/output.png', bbox_inches='tight')
+        my_path = str(os.path.abspath(__file__))
+        if my_path.endswith('/myapp/views.py'):
+            my_path = my_path[:-15]
+        plt.savefig(my_path + '/static/output.png', bbox_inches='tight')
+        # plt.savefig('/Users/kevin/Documents/mapweb/myproject/static/output.png', bbox_inches='tight')
         # Process the input strings and generate the output image
         # output_image = process_inputs(input1, input2)
 
