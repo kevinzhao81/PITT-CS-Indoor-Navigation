@@ -1,5 +1,6 @@
 # PITT-CS-Indoor-Navigation
 Python 3.8 and Pip required
+
 In your terminal, run
 ```console
 git clone git@github.com:kevinzhao81/PITT-CS-Indoor-Navigation.git
