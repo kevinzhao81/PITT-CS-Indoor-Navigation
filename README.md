@@ -2,7 +2,7 @@
 
 In your terminal, run
 ```console
-git clone https://github.com/kevinzhao81/PITT-CS-Indoor-Navigation.git
+git clone git@github.com:kevinzhao81/PITT-CS-Indoor-Navigation.git
 cd PITT-CS-Indoor-Navigation
 pip install django networkx matplotlib numpy
 python manage.py runserver
