@@ -1,10 +1,16 @@
 # PITT-CS-Indoor-Navigation
-
+Python 3.8 and Pip required
 In your terminal, run
 ```console
 git clone git@github.com:kevinzhao81/PITT-CS-Indoor-Navigation.git
+```
+```console
 cd PITT-CS-Indoor-Navigation
+```
+```console
 pip install django networkx matplotlib numpy
+```
+```console
 python manage.py runserver
 ```
 
