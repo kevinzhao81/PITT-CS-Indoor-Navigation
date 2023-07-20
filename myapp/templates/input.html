@@ -1,10 +1,20 @@
 <form method="post" action="{% url 'process' %}">
     {% csrf_token %}
-    <label for="input1">Source:</label>
-    <input type="text" name="input1"><br>
+    <label for="inputBox"></label><br>
+    <input list="options" id="inputBox" name="input1" placeholder="Source">
+    <datalist id="options">
+        {% for value in predefined_values %}
+        <option value="{{value}}">
+        {% endfor %}
+    </datalist>
 
-    <label for="input2">Destination:</label>
-    <input type="text" name="input2" required><br>
+    <label for="inputBox"></label><br>
+    <input list="options" id="inputBox" name="input2" placeholder="Destination">
+    <datalist id="options">
+        {% for value in predefined_values %}
+        <option value="{{value}}">
+        {% endfor %}
+    </datalist>
 
     <input type="submit" value="Go!">
 </form>

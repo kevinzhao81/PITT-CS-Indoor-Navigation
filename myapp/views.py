@@ -270,6 +270,45 @@ def process_view(request):
 
         path = nx.shortest_path(G,input1,input2)
         
+        # text instructions
+        dir_dict = {'up':0, 'right':1, 'down':2, 'left':3}
+        num_to_dir = ['up','right','down','left']
+
+        curr_dir = 3
+        next_dir = 3
+        dir_path = []
+        instructions = []
+        for i in range(len(path)-1):
+            pt1 = all_points[path[i]]
+            pt2 = all_points[path[i+1]]
+
+            if pt2[1]>pt1[1]:
+                next_dir = 2
+            elif pt2[1]<pt1[1]:
+                next_dir = 0
+            elif pt2[0]>pt1[0]:
+                next_dir = 1
+            elif pt2[0]<pt1[0]:
+                next_dir = 3
+
+            if next_dir == 3 and curr_dir == 0:
+                instructions.append('LEFT')
+            elif next_dir == 0 and curr_dir == 3:
+                instructions.append('RIGHT')
+            elif next_dir > curr_dir:
+                instructions.append('RIGHT')
+            elif next_dir < curr_dir:
+                instructions.append('LEFT')
+            elif next_dir == curr_dir:
+                if path[i].isdigit():
+                    instructions.append('KEEPING GOING PAST ROOM ' + path[i])
+
+            if next_dir != curr_dir:
+                curr_dir = next_dir
+                dir_path.append(num_to_dir[curr_dir])
+        # print(instructions)
+
+        # image
         img = mpimg.imread('/Users/kevin/Documents/mapweb/myproject/static/floor6_map.png')
 
         plt.annotate('YOU ARE HERE',all_points[path[0]])
@@ -292,13 +331,13 @@ def process_view(request):
         # Process the input strings and generate the output image
         # output_image = process_inputs(input1, input2)
 
-        return render(request, 'output.html')
+        return render(request, 'output.html', {'string_list': instructions})
     # return render(request, 'output.html', {'output_image': output_image})
     # return redirect('output.html')
     # template = loader.get_template('output.html')
     # return HttpResponse(template.render())
-
-    return render(request, 'input.html')
+    predefined_values = ['men_br', 'women_br', 'elev', '6101', '6103', '6104', '6105', '6106', '6107', '6108', '6109', '6110', '6111', '6113', '6115', '6116', '6117', '6119', '6123', '6125', '6127', '6129', '6131', '6133', '6135', '6137', '6139', '6141', '6143', '6145', '6146', '6148', '6150', '6203', '6204', '6205', '6206', '6207', '6209', '6211', '6212', '6213', '6215', '6305', '6307', '6309', '6311', '6312', '6313', '6317', '6323', '6329', '6401', '6403', '6404', '6405', '6406', '6407', '6408', '6409', '6410', '6411', '6412','6413', '6414', '6415', '6416', '6419', '6421', '6423', '6425', '6427', '6429', '6501', '6502', '6503', '6504', '6505', '6506', '6507', '6508', '6509', '6510', '6511', '6512', '6514', '6516', '6803', '6804', '6805', '6806',]
+    return render(request, 'input.html', {'predefined_values': predefined_values})
 
 def process_inputs(input1, input2):
     # Your code to process the input strings and generate the output image
