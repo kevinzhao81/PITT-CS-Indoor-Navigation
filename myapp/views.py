@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from .models import Image
+from django.views import View
+from django.template.loader import render_to_string
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -268,6 +270,9 @@ def process_view(request):
         # input1 = request.POST.get('input1') # src
         input2 = request.POST.get('input2') # dest
 
+        print(input1)
+        print(input2)
+
         path = nx.shortest_path(G,input1,input2)
         
         # text instructions
@@ -336,7 +341,10 @@ def process_view(request):
     # return redirect('output.html')
     # template = loader.get_template('output.html')
     # return HttpResponse(template.render())
-    predefined_values = ['men_br', 'women_br', 'elev', '6101', '6103', '6104', '6105', '6106', '6107', '6108', '6109', '6110', '6111', '6113', '6115', '6116', '6117', '6119', '6123', '6125', '6127', '6129', '6131', '6133', '6135', '6137', '6139', '6141', '6143', '6145', '6146', '6148', '6150', '6203', '6204', '6205', '6206', '6207', '6209', '6211', '6212', '6213', '6215', '6305', '6307', '6309', '6311', '6312', '6313', '6317', '6323', '6329', '6401', '6403', '6404', '6405', '6406', '6407', '6408', '6409', '6410', '6411', '6412','6413', '6414', '6415', '6416', '6419', '6421', '6423', '6425', '6427', '6429', '6501', '6502', '6503', '6504', '6505', '6506', '6507', '6508', '6509', '6510', '6511', '6512', '6514', '6516', '6803', '6804', '6805', '6806',]
+    predefined_values = [
+        {'name': '6115', 'image': "xulong_tang.png", 'description': 'Xulong Tang Dr. Tang joined the Department of Computer Science in the fall of 2019. He received his PhD degree from Penn State in 2019. He obtained his MS from the University of Science and Technology of China, USTC and his BS from Harbin Institute of Technology, both in Computer Science. His research interests lie in the fields of high-performance computing and parallel computer architectures and systems. In particular, he is interested in effective and efficient system optimization for complicated real world applications.'},
+        {'name': '6403', 'image': 'malihe-alikhani.march2021.jpeg', 'description': 'Dr. Malihe Alikhani is an assistant professor of computer science in the School of Computing and Information at the University of Pittsburgh. She got her PhD in computer science and a graduate certificate in cognitive science from Rutgers University. She was the recipient of the fellowship award for excellence in computation and data sciences from the Rutgers Discovery Informatics Institute in 2018. Before joining Rutgers, she was a lecturer and an adjunct professor of mathematics and statistics for a year at San Diego State University and San Diego Mesa College. She has served as a member of the program committee of ACL, NAACL, EMNLP, AAAI, NeurIPS, ICRL, ICMI, and INGL and is currently the associate editor of the Mental Note Journal.'},
+    ]
     return render(request, 'input.html', {'predefined_values': predefined_values})
 
 def process_inputs(input1, input2):
