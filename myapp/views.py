@@ -314,7 +314,11 @@ def process_view(request):
         # print(instructions)
 
         # image
-        img = mpimg.imread('/Users/kevin/Documents/mapweb/myproject/static/floor6_map.png')
+        my_path = str(os.path.abspath(__file__))
+        if my_path.endswith('/myapp/views.py'):
+            my_path = my_path[:-15]
+        
+        img = mpimg.imread(my_path + '/static/floor6_map.png')
 
         plt.annotate('YOU ARE HERE',all_points[path[0]])
         plt.plot(all_points[path[0]][0],all_points[path[0]][1],'Dy',markersize=15)
